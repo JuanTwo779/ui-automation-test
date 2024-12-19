@@ -20,7 +20,7 @@ public class ContactTests extends BaseTest{
     }
 
 //    @Test
-//    public void testEnterAcceptableEmailAndPasswords(){
+//    public void testContactPage(){
 //        navigateToContactPage();
 //        Locator contactPage = page.locator(".wizard-content app-register-contact-page");
 //        assertThat(contactPage).isVisible();
@@ -107,10 +107,32 @@ public class ContactTests extends BaseTest{
     }
 
     @Test
-    public void testNoValidationForPostcodeField(){
-        //T18. negative number, letters, no length restrictions for postcode
+    public void testNegativeNumberForPostcodeField(){
+        //negative number for postcode
         navigateToContactPage();
-        page.fill("#postcode", "-1 Post ..................");
+        page.fill("#postcode", "-1");
+
+        //no error messages
+        Locator validationMessage = page.locator(".validation-messages").nth(3);
+        assertThat(validationMessage.locator("*")).hasCount(0);
+    }
+
+    @Test
+    public void testLetterForPostcodeField(){
+        //letters for postcode
+        navigateToContactPage();
+        page.fill("#postcode", "letter");
+
+        //no error messages
+        Locator validationMessage = page.locator(".validation-messages").nth(3);
+        assertThat(validationMessage.locator("*")).hasCount(0);
+    }
+
+    @Test
+    public void testInputLengthForPostcodeField(){
+        //letters for postcode
+        navigateToContactPage();
+        page.fill("#postcode", "1234567890abcdefghij");
 
         //no error messages
         Locator validationMessage = page.locator(".validation-messages").nth(3);
@@ -205,12 +227,12 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testContactBackButton(){
-        //T24.
+        //T24. click the back button
         navigateToContactPage();
         Locator backButton = page.locator(".wizard-button").nth(0);
         backButton.click();
 
-        //display registration/user page
+        //returns to registration/user page
         Locator registrationPage = page.locator(".wizard-content app-register-user-page");
         assertThat(registrationPage).isVisible();
     }
