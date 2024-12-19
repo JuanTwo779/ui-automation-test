@@ -23,7 +23,7 @@ public class PaymentTests extends BaseTest {
     }
 
 //    @Test
-//    public void testEnterAcceptableEmailAndPasswords(){
+//    public void testPaymentPage(){
 //        navigateToPaymentPage();
 //        Locator paymentPage = page.locator(".wizard-content app-register-payment-page");
 //        assertThat(paymentPage).isVisible();

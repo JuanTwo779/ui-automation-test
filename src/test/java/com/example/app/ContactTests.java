@@ -1,13 +1,10 @@
 package com.example.app;
 
 import com.microsoft.playwright.Locator;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ContactTests extends BaseTest{
@@ -28,7 +25,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testNonAlphaCharInFirstName(){
-        //T12. non-alpha characters in first name field
+        // non-alpha characters in first name field
         navigateToContactPage();
         page.fill("#firstName", "123%^&");
 
@@ -39,7 +36,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testNonAlphaCharInLastName(){
-        //T13. non-alpha characters in first name field
+        // non-alpha characters in first name field
         navigateToContactPage();
         page.fill("#lastName", "123%^&");
 
@@ -61,7 +58,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testLastNameErrorMessageTiedToFirstName(){
-        //T14. an invalid value in the first name field displays an error message under the last name field
+        // an invalid value in the first name field displays an error message under the last name field
         navigateToContactPage();
         page.fill("#firstName", "");
 
@@ -72,7 +69,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testPreferredFullNameContainExtraSpace(){
-        //T15. enter first name and last name, leave middle name blank, preferred name has extra space
+        //enter first name and last name, leave middle name blank, preferred name has extra space
         navigateToContactPage();
         page.fill("#firstName", "Juan");
         page.fill("#lastName", "Mangubat");
@@ -84,7 +81,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testNoValidationForAddressField(){
-        //T16. any characters allowed for address line 1 input
+        //any characters allowed for address line 1 input
         navigateToContactPage();
         page.fill("#addressLine1", "The Moon !@#$");
 
@@ -95,7 +92,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testDuplicateAddressFields(){
-        //T17. duplicate addresses allowed
+        //duplicate addresses allowed
         navigateToContactPage();
         page.fill("#addressLine1", "207–361 Flinders Street");
         page.fill("#addressLine2", "207–361 Flinders Street");
@@ -141,7 +138,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testNoValidationForCityField(){
-        //T19. any characters and input length allowed for city field
+        //any characters and input length allowed for city field
         navigateToContactPage();
         page.fill("#city", "-1 City ..................");
 
@@ -152,7 +149,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testDuplicateInStateDropdown(){
-        //T20. state selection field contains duplicate values
+        //state selection field contains duplicate values
         navigateToContactPage();
         String val1 = page.locator("//*[@id=\"state\"]/option[6]").innerText();
         String val2 = page.locator("//*[@id=\"state\"]/option[7]").innerText();
@@ -163,7 +160,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testRequiredInputValidationMessages(){
-        //21. each required input displays error message when not filled in
+        //each required input displays error message when not filled in
         navigateToContactPage();
         page.fill("#firstName", "");
         page.fill("#lastName", "");
@@ -189,7 +186,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testCompleteRequiredInputs(){
-        //22. proceed to next page after entering required inputs
+        //proceed to next page after entering required inputs
         navigateToContactPage();
         page.fill("#firstName", "Juan");
         page.fill("#lastName", "Mangubat");
@@ -206,7 +203,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testCompleteAllInputs(){
-        //23. proceed to next page after entering all inputs
+        //proceed to next page after entering all inputs
         navigateToContactPage();
         page.fill("#firstName", "Juan");
         page.fill("#middleName", "Messi");
@@ -227,7 +224,7 @@ public class ContactTests extends BaseTest{
 
     @Test
     public void testContactBackButton(){
-        //T24. click the back button
+        //click the back button
         navigateToContactPage();
         Locator backButton = page.locator(".wizard-button").nth(0);
         backButton.click();
