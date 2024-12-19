@@ -33,7 +33,6 @@ public class CompleteTests extends BaseTest{
 
         Locator textArea = page.locator("#termsAndConditions");
         textArea.evaluate("element => element.scrollTop = element.scrollHeight");
-        textArea.evaluate("element => element.scrollTop = element.scrollHeight");
         Locator checkbox = page.locator("#agreedToTerms");
         checkbox.click();
         page.click(".wizard-button.primary");
@@ -45,6 +44,7 @@ public class CompleteTests extends BaseTest{
         Locator pElem = page.locator("app-register-complete-page p").nth(0);
 
         //displays welcome without a name
+        pElem.waitFor();
         assertThat(pElem).hasText("Welcome, .");
     }
 
@@ -54,6 +54,7 @@ public class CompleteTests extends BaseTest{
         Locator pElem = page.locator("app-register-complete-page p").nth(1);
 
         //displays success message with user's email
+        pElem.waitFor();
         assertThat(pElem).containsText("Your user account " + email + " has been successfully registered.");
     }
 }

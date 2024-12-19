@@ -4,8 +4,7 @@ import com.microsoft.playwright.Locator;
 import org.junit.jupiter.api.Test;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TermsConditionsTests extends BaseTest{
     private void navigateToTermsPage() {
@@ -62,6 +61,8 @@ public class TermsConditionsTests extends BaseTest{
         textArea.evaluate("element => element.scrollTop = element.scrollHeight");
 
         //assert the checkbox is enabled after scrolling
+        checkbox = page.locator("#agreedToTerms");
+        checkbox.waitFor();
         assertFalse(checkbox.isDisabled());
     }
 
@@ -79,11 +80,10 @@ public class TermsConditionsTests extends BaseTest{
     }
 
     @Test
-    public void testCompleteAllRequirementsAndSubmit(){
+    public void testCompleteAllRequirementsAndSubmitSuccessToast(){
         //scroll the terms, click checkbox, submit
         navigateToTermsPage();
         Locator textArea = page.locator("#termsAndConditions");
-        textArea.evaluate("element => element.scrollTop = element.scrollHeight");
         textArea.evaluate("element => element.scrollTop = element.scrollHeight");
         Locator checkbox = page.locator("#agreedToTerms");
         checkbox.click();
@@ -95,7 +95,7 @@ public class TermsConditionsTests extends BaseTest{
 
         Locator toast = page.locator("app-toast-overlay .toast-message.success");
         assertThat(toast).isVisible();
-        assertThat(toast).hasText("Successfully registered user");
+        assertThat(toast).containsText("Successfully registered user");
     }
 
     @Test

@@ -185,12 +185,13 @@ public class RegistrationTests extends BaseTest {
 
     @Test
     public void testSpamNextButtonToSkipMultiplePages(){
-        //error toast when existing email is used to register
+        //spam next more than once while waiting for contact page
         page.fill("#emailAddress", "juan@gmail.com");
         page.fill("#password", "password123");
         page.fill("#confirmPassword", "password123");
         page.click(".wizard-button.primary");
         page.click(".wizard-button.primary");
+        page.locator(".wizard-content app-register-contact-page").waitFor();
 
         //progress to next page
         page.click(".wizard-button.primary");
